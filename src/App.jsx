@@ -1,34 +1,36 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
+import './Style/style.css'
+import Navbar from './components/Navbar/Navbar'
+import ItemListContainer from './components/ItemListContainer'
+
+
+
+/* Un componente es una funcion que empieza con mayuscula y retorna un jsx */
+/* Las props son parametros o propiedades de un objeto o arreglo, props es un objeto con titulo y subtitulo*/
+/* <Menu pagina1='' pagina2=''/> es un componenete equivalente a Menu(pagina1, pagina2...) */
+/* Titulo es child component de App, las props es la manera como el componente App pasa parametros al componente child titulo */
+/* Los compponenentes presentacionales solo muestran datos Ejm Titulo, Form, Section */
+/* Los componentes contenedores encapsulan otros componentes y le pasan las propiedades, tambien modifican el estado (state components), tienen varias variables  Ejm App, en estos componentes estan las llamdas a las Apis*/
+/* Children (es una prop predefinida en react), es una forma de crear props (parametros de un objeto) */
+
 
 function App() {
-  const [count, setCount] = useState(0)
+ 
+return (
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <div>
+
+
+       <Navbar />
+         
+      <ItemListContainer greeting={'Bienvenido a PS5 Zone'}/>
+
+
+    
+   </div>
+)
+
 }
 
 export default App
