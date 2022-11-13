@@ -1,4 +1,6 @@
-/* * {
+
+
+* {
     box-sizing: border-box;
 }
 
@@ -6,7 +8,11 @@ body {
     margin: 0;
 }
 
-.nav {
+.decoracion-texto{
+text-decoration: none;
+}
+
+/* .nav {
     background-color: rgb(44, 166, 200);
     color: white;
     display: flex;
@@ -15,6 +21,8 @@ body {
     gap: 2rem;
     padding: 0 1rem;
 }
+
+
 
 .titulo-pagina {
     font-size: 3rem;
@@ -43,6 +51,14 @@ body {
 
 .nav li:hover {
     background-color: rgb(98, 209, 243);
+}
+
+
+.saludo {
+text-decoration: none;
+color: blue;
+font-size: 1.3rem;
+padding: auto;
+text-align: center;
+font-size: 2rem;
 } */
-
-
