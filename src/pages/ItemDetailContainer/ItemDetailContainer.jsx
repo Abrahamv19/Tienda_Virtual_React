@@ -1,8 +1,7 @@
 import ItemDetail from "../../components/ItemDetail/ItemDetail"
 import { useParams } from 'react-router-dom'
-import { useEffect } from "react"
-import { gFetch } from "../../utilities/gFetch"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { doc, getDoc, getFirestore } from 'firebase/firestore'
 
 
 const ItemDetailContainer = () => {
@@ -14,10 +13,13 @@ const ItemDetailContainer = () => {
     const {productId} = useParams()
 
     useEffect(() => {
-     gFetch(productId) 
-     .then(resp => setProduct(resp))
-     .catch(err => console.log(err))
-     .finally(() => setLoading(false))
+      //traer un producto de dbFirestore por productId
+      const dbFirestore = getFirestore()
+      const queryCollection = doc(dbFirestore, 'items', productId)
+      getDoc(queryCollection)
+      .then((doc) => setProduct( { id: doc.id, ...doc.data() } ))
+      .catch(err => console.log(err))
+      .finally(() => setLoading(false))
     }, [])
     console.log(product)
   return (

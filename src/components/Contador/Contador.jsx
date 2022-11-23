@@ -22,12 +22,12 @@ const Contador = ({ initial=1, stock=100, onAdd }) => {
     }
   return (
 
-    <div className="border border-1 border-info">
-        <button className="btn btn-outline-info" onClick={restar}>-</button>
+    <div className="border border-1 border-info mt-2 mb-2">
+        <button className="btn btn-outline-info mt-2 mb-2" onClick={restar}>-</button>
        <label>{cantidad}</label>
-        <button className="btn btn-outline-info" onClick={sumar}>+</button>
+        <button className="btn btn-outline-info mt-2 mb-2" onClick={sumar}>+</button>
         <br />
-        <button className="btn btn-outline-info" onClick={addCantidad}>Agregar al carrito</button>
+        <button className="btn btn-outline-info mt-2 mb-2" onClick={addCantidad}>Agregar al carrito</button>
     </div>
    
   )
