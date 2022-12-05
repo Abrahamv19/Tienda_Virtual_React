@@ -1,10 +1,52 @@
 
+import { addDoc, collection, doc, getFirestore, updateDoc } from "firebase/firestore"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useCartContext } from "../../context/CartContext"
 
 const Carrito = () => {
 
+  const [ dataForm, setDataForm] = useState({
+    name: '',
+    phone: '',
+    email: ''
+  })
   const { cartList, borrarCarrito, removeProduct, totalPrice } = useCartContext()
+  const handleSubmit = (evt) => {
+    evt.preventDefault()
+    let order = {}
+    order.buyer = dataForm
+    order.total = totalPrice()
+    order.items = cartList.map(product => {
+      return {
+      id: product.id,
+      name: product.name, 
+      price: product.price
+    }} )
+    
+    const db = getFirestore()
+    const queryCollection = collection(db, 'orders')
+    addDoc(queryCollection, order)
+    .then(resp => console.log(resp))
+    .finally(() => {
+      setDataForm({
+        name: '',
+        phone: '',
+        email: ''
+      })
+      borrarCarrito()
+    })    
+  }
+
+  const handleOnChange = (evt) => {
+    console.log('nombre input:', evt.target.name) 
+    console.log('valor input:', evt.target.value)
+    setDataForm({
+      ...dataForm,
+      [evt.target.name]: evt.target.value
+    })
+  }
+    console.log(dataForm)
 
   if(cartList.length === 0) {
     return (
@@ -26,7 +68,7 @@ const Carrito = () => {
                                     Subtotal: ${product.cantidad * product.price} 
                                   </p>
                                   <div>
-                                  <button onClick= { () => removeProduct (product.id) }>Eliminar producto</button>
+                                  <button className="btn btn-outline-primary" onClick= { () => removeProduct (product.id) }>Eliminar producto</button>
                                   </div>
                                    </li> 
                                   
@@ -38,7 +80,15 @@ const Carrito = () => {
           Total: {totalPrice()}
         </p>
        
-      <button onClick={borrarCarrito}>Vaciar Carrito</button>
+      <button className="btn btn-outline-danger" onClick={borrarCarrito}>Vaciar Carrito</button>
+
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="name"        onChange={handleOnChange} value={dataForm.name} placeholder="Ingrese Nombre"/>
+        <input type="text" name="email"       onChange={handleOnChange} value={dataForm.email} placeholder="Ingrese Email"/>
+        <input type="text" name="repeatEmail" onChange={handleOnChange}                        placeholder="Repita Email"/>
+        <input type="text" name="phone"       onChange={handleOnChange} value={dataForm.phone} placeholder="Ingrese Telefono"/>
+      <button className="btn btn-outline-success">Generar orden</button>
+      </form>
     </div>
   )
 }
