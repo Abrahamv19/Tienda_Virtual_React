@@ -5,15 +5,12 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore'
 
 
 const ItemDetailContainer = () => {
-    //*llamada a la api para un producto en particular
-    //guardar en un estado el producto que traigamos
-
+ 
     const [product, setProduct] = useState({})
     const [loading, setLoading]= useState(true)
     const {productId} = useParams()
 
     useEffect(() => {
-      //traer un producto de dbFirestore por productId
       const dbFirestore = getFirestore()
       const queryCollection = doc(dbFirestore, 'items', productId)
       getDoc(queryCollection)

@@ -1,6 +1,4 @@
 import { useState } from "react"
-import { Card } from "react-bootstrap"
-
 
 const Contador = ({ initial=1, stock=100, onAdd }) => {
 

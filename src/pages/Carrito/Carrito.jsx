@@ -1,8 +1,9 @@
 
-import { addDoc, collection, doc, getFirestore, updateDoc } from "firebase/firestore"
+import { addDoc, collection, getFirestore } from "firebase/firestore"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useCartContext } from "../../context/CartContext"
+import swal from "sweetalert"
 
 const Carrito = () => {
 
@@ -11,7 +12,7 @@ const Carrito = () => {
     phone: '',
     email: ''
   })
-  const { cartList, borrarCarrito, removeProduct, totalPrice } = useCartContext()
+  const { cartList, cartDeleted, removeProduct, totalPrice } = useCartContext()
   const handleSubmit = (evt) => {
     evt.preventDefault()
     let order = {}
@@ -27,14 +28,24 @@ const Carrito = () => {
     const db = getFirestore()
     const queryCollection = collection(db, 'orders')
     addDoc(queryCollection, order)
-    .then(resp => console.log(resp))
+    .then(order => {
+      const orderId =`Se ha generado de manera exitosa tu orden de compra con el ID: ${order.id}`
+      
+      swal({
+        title: "!Listo¡",
+        text: orderId,
+        icon: "success",
+      })
+
+    })
+    .catch(error => console.log(error))
     .finally(() => {
       setDataForm({
         name: '',
         phone: '',
         email: ''
       })
-      borrarCarrito()
+      cartDeleted()
     })    
   }
 
@@ -80,7 +91,7 @@ const Carrito = () => {
           Total: {totalPrice()}
         </p>
        
-      <button className="btn btn-outline-danger" onClick={borrarCarrito}>Vaciar Carrito</button>
+      <button className="btn btn-outline-danger" onClick={cartDeleted}>Vaciar Carrito</button>
 
       <form onSubmit={handleSubmit}>
         <input type="text" name="name"        onChange={handleOnChange} value={dataForm.name} placeholder="Ingrese Nombre"/>

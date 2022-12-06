@@ -1,7 +1,6 @@
 import { ImCart } from 'react-icons/Im';
 import { useCartContext } from '../../../context/CartContext';
 
-
 const CartWidget = () => {
 const { totalProducts } = useCartContext()
 

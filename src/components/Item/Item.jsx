@@ -1,5 +1,5 @@
 import { memo } from "react"
-import { Card, Col, Container, Row } from "react-bootstrap"
+import { Card, Container } from "react-bootstrap"
 import { Link } from 'react-router-dom'
 
 const Item = memo(({ product }) => {

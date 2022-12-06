@@ -10,40 +10,32 @@ const ItemListContainer = (obj) => {
 
   const [products, setProducts] = useState([])
   const [loading, setLoading]= useState(true)
-  const [bool, setBool]= useState(true)
-  const {categoriaId} = useParams()
+  const {categoryId} = useParams()
 
   useEffect(() => {
      const dbFirestore = getFirestore()
      const queryCollection = collection(dbFirestore, 'items')
-    if (categoriaId) {
-      //traer todos los productos de dbFirestore por filtro
-      let queryFilter = query(queryCollection, where('description', '==', categoriaId))
+    if (categoryId) {
+      let queryFilter = query(queryCollection, where('description', '==', categoryId))
       getDocs(queryFilter)
       .then((resp) => setProducts( resp.docs.map(doc => ({ id: doc.id, ...doc.data() })) ))
       .catch(err => console.log(err))
       .finally(() => setLoading(false)) 
     }else{  
-      //traer todos los productos de dbFirestore sin filtro
       getDocs(queryCollection)
       .then((resp) => setProducts( resp.docs.map(doc => ({ id: doc.id, ...doc.data() })) ))
       .catch(err => console.log(err))
       .finally(() => setLoading(false)) 
     }
   
-  }, [categoriaId]) 
-
-
-  console.log(products)
+  }, [categoryId]) 
 
   return (
     loading 
     ?  <h2>Cargando...</h2>
     :
-
     <div>
 <Container fluid>     
-    
      { 
   <ItemList products={products}/>
    } 

@@ -9,12 +9,9 @@ const ItemDetail = ({ product }) => {
   const [isCounter, setIscounter] = useState(true)
   const {cartList, agregarAlCarrito} = useCartContext()
   const onAdd = (cantidad) => {
-    console.log(cantidad)
-   /*  agregarAlCarrito( { ...product, cantidad } ) */
    agregarAlCarrito(product, cantidad)
     setIscounter(false)
-  }
-  console.log(cartList)  
+  } 
 
   return (
     <center>
@@ -37,7 +34,6 @@ const ItemDetail = ({ product }) => {
        </div>
       }
     </div>
-   
     </div>
     </Card>
   </center>

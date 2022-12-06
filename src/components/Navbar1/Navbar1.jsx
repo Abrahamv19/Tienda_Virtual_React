@@ -15,20 +15,20 @@ const Navbar1 = () => {
           <FaPlaystation size={42} />
         </Navbar.Brand>
         <Navbar.Brand>
-        <Link to='/'>PS5 Zone</Link>
+        <Link to='/'>PS5 ZONE</Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-          <Nav>
+          <Navbar.Brand>
             <Link to='/categoria/Accion'>Accion</Link>
-            </Nav>
-            <Nav>
+            </Navbar.Brand>
+            <Navbar.Brand>
             <Link to='/categoria/Aventura'>Aventura</Link>
-            </Nav>
-            <Nav>
+            </Navbar.Brand>
+            <Navbar.Brand>
             <Link to='/categoria/Deportes'>Deportes</Link>
-            </Nav>
+            </Navbar.Brand>
           </Nav>
           <Nav>
          

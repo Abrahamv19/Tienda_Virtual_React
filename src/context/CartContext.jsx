@@ -4,12 +4,7 @@ const CartContext = createContext([])
 export const useCartContext = () => useContext(CartContext)
 
 const CartContextProvider = ({children}) => {
-//estados (cartList) y funciones globales
 const [cartList, setCartList] = useState([])
-
-/* const agregarAlCarrito = (newProductCart) => {
-    setCartList( [...cartList, newProductCart ] )
-} */
 
 const agregarAlCarrito = (products, nuevaCantidad) => {
     const { cantidad = 0 } = cartList.find(prod => prod.id === products.id) || {}
@@ -17,7 +12,7 @@ const agregarAlCarrito = (products, nuevaCantidad) => {
     setCartList([...newCart, {...products, cantidad: cantidad + nuevaCantidad } ] ) 
 }
 
-const borrarCarrito = () => {
+const cartDeleted = () => {
     setCartList([])
 }
 
@@ -37,7 +32,7 @@ const totalProducts = () => cartList.reduce((acumulador, productoActual) => acum
     <CartContext.Provider value={{
        cartList,
        agregarAlCarrito, 
-       borrarCarrito,
+       cartDeleted,
        isInCart,
        removeProduct,
        totalPrice,
