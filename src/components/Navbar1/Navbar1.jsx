@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { FaPlaystation } from "react-icons/fa";
+import logo from '../../IMG/playstation.png';
+
 import CartWidget from "./Cart/CartWidget";
 import '../Navbar1/Navbar1.css'
 
@@ -12,7 +13,9 @@ const Navbar1 = () => {
       <Container>
         <Navbar.Brand href="#home">
           {" "}
-          <FaPlaystation size={42} />
+          <Link to='/'>
+         <img src={logo} alt="" width={50}></img>
+         </Link>
         </Navbar.Brand>
         <Navbar.Brand>
         <Link to='/'>PS5 ZONE</Link>

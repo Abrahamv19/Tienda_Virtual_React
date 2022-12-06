@@ -32,7 +32,7 @@ const Carrito = () => {
       const orderId =`Se ha generado de manera exitosa tu orden de compra con el ID: ${order.id}`
       
       swal({
-        title: "!Listo¡",
+        title: "¡Gracias por tu compra!",
         text: orderId,
         icon: "success",
       })
